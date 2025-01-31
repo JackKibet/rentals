@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Apartments</title>
+    <style>
+      /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: hsl(128, 54%, 45%);
+}
+
+h1, h2 {
+    color: #333;
+}
+
+nav ul {
+    background-color: #333;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav li {
+    margin: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+nav a:hover {
+    background-color: #575757;
+    border-radius: 5px;
+}
+
+/* Home Section */
+#home {
+    background-color: #ff6347;
+    padding: 50px;
+    text-align: center;
+    color: white;
+}
+
+#home h1 {
+    font-size: 3em;
+    animation: fadeIn 2s ease-out;
+}
+
+#home p {
+    font-size: 1.5em;
+}
+
+/* Available Rooms Section */
+#available {
+    padding: 20px;
+    text-align: center;
+}
+
+.room-card {
+    background-color: #fff;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    width: 250px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.room-card:hover {
+    transform: scale(1.05);
+}
+
+.room-card h3 {
+    color: #333;
+}
+
+/* Payment Section */
+#payment {
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+}
+
+#payment form {
+    display: inline-block;
+    background-color: #f0f0f0;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#payment input {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#payment button {
+    padding: 10px 20px;
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#payment button:hover {
+    background-color: #e5533e;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+  footer{
+    text-align: center;
+    background-color: #333;
+    padding: 22px;
+    color: white;
+  }
+  #room-list{
+    background-color: rgb(208, 208, 218);
+  }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#available">Available Rooms</a></li>
+            <li><a href="#payment">Payment</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+        <h1>Welcome to Our Rental Apartments</h1>
+        <p>Find your next home with ease!</p>
+    </section>
+
+    <!-- Available Rooms Section -->
+    <section id="available">
+        <h2>Available Rooms</h2>
+        <div id="room-list">
+            <!-- Rooms will be dynamically inserted by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Payment Section -->
+    <section id="payment">
+        <h2>Pay Your Rent</h2>
+        <form id="payment-form">
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" placeholder="Enter Rent Amount" required>
+            <button type="submit">Pay Rent</button>
+        </form>
+    </section>
+<footer>
+    <p>&copy; 2025 all rights reserved</p>
+</footer>
+    <script>
+        // Sample data for rooms
+const rooms = [
+    { id: 1, name: 'Studio Apartment', price: 50000 },
+    { id: 2, name: '1-Bedroom Apartment', price: 7000 },
+    { id: 3, name: '2-Bedroom Apartment', price: 9000 },
+    { id: 4, name: 'Studio Apartment', price: 15000 },
+    { id: 5, name: '3-Bedroom Apartment', price: 30000 },
+    { id: 6, name: '4-Bedroom Apartment', price: 22000 },
+    { id: 7, name: 'Studio Apartment', price: 12000 },
+    { id: 8, name: '5-Bedroom Apartment', price: 17000 },
+    { id: 9, name: '6-Bedroom Apartment', price: 45000 } 
+];
+
+// Dynamically load available rooms
+const roomList = document.getElementById('room-list');
+
+rooms.forEach(room => {
+    const roomCard = document.createElement('div');
+    roomCard.classList.add('room-card');
+    roomCard.innerHTML = `
+        <h3>${room.name}</h3>
+        <p>Price: ksh:${room.price}/month</p>
+        <button onclick="selectRoom(${room.id})">Select</button>
+    `;
+    roomList.appendChild(roomCard);
+});
+
+// Handle room selection
+function selectRoom(roomId) {
+    const room = rooms.find(r => r.id === roomId);
+    alert(`You selected the ${room.name} which costs $${room.price}/month.`);
+}
+
+// Handle payment submission
+const paymentForm = document.getElementById('payment-form');
+
+paymentForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const amount = document.getElementById('amount').value;
+    alert(`You have successfully paid $${amount} for your rent.`);
+});
+
+    </script>
+</body>
+</html>
